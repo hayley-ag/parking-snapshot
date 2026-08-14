@@ -17,7 +17,7 @@ app.use('/api', router)
 
 // Serve built client in production
 if (process.env.NODE_ENV === 'production') {
-  const clientPath = path.join(__dirname, '../public')
+  const clientPath = path.join(__dirname, '../../dist/public')
   app.use(express.static(clientPath))
   app.get('*', (_req, res) => {
     res.sendFile(path.join(clientPath, 'index.html'))
