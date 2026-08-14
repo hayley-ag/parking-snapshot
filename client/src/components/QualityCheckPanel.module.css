@@ -1,0 +1,200 @@
+.panel {
+  border-top: 1px solid var(--border);
+  padding-top: 32px;
+}
+
+.checking {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  padding: 20px 0;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--border);
+  border-top-color: var(--orange);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.verdict {
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.group {
+  margin-bottom: 28px;
+}
+
+.groupTitle {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.missedCard {
+  background: #FFFBEB;
+  border: 1.5px solid #F6D860;
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  cursor: pointer;
+  user-select: none;
+  transition: border-color 0.12s, background 0.12s;
+}
+
+.missedCard:hover {
+  border-color: var(--orange);
+}
+
+.missedCardSelected {
+  background: #FFF5EE;
+  border-color: var(--orange);
+}
+
+.checkmark {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid #F6D860;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  color: var(--orange);
+  font-weight: 700;
+  background: white;
+  margin-top: 1px;
+}
+
+.missedCardSelected .checkmark {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: white;
+}
+
+.quote {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.whyItMatters {
+  font-size: 0.82rem;
+  color: #92710A;
+  line-height: 1.4;
+}
+
+.regenBtn {
+  background: var(--orange);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  padding: 10px 20px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: opacity 0.15s;
+}
+
+.regenBtn:hover:not(:disabled) { opacity: 0.85; }
+.regenBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* Freeform section */
+.freeformSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.freeformLabel {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.freeformTextarea {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--text);
+  background: var(--surface);
+  resize: vertical;
+  line-height: 1.5;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+
+.freeformTextarea:focus {
+  outline: none;
+  border-color: var(--orange);
+}
+
+.freeformTextarea::placeholder {
+  color: var(--text-muted);
+}
+
+.inlineMsg {
+  font-size: 0.82rem;
+  color: #92710A;
+}
+
+.freeformBtn {
+  align-self: flex-start;
+  background: var(--text);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  padding: 10px 20px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.freeformBtn:hover:not(:disabled) { opacity: 0.8; }
+.freeformBtn:disabled { opacity: 0.5; cursor: not-allowed; }

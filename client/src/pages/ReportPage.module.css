@@ -1,0 +1,548 @@
+.wrapper {
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.backBtn {
+  background: none;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--text);
+  font-family: inherit;
+  transition: border-color 0.15s;
+}
+
+.backBtn:hover { border-color: var(--orange); color: var(--orange); }
+.backBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.exportBtns { display: flex; gap: 10px; }
+
+.exportBtn {
+  background: var(--orange);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 8px 18px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.15s;
+}
+
+.exportBtn:hover:not(:disabled) { opacity: 0.85; }
+.exportBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* Report body */
+.report {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 32px 32px;
+  display: block;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+/* ── Cover ───────────────────────────────────────── */
+
+/* Outer page-1 wrapper — dark top + white bottom, exactly one letter page tall */
+.coverPage {
+  height: 279mm;
+  display: flex;
+  flex-direction: column;
+  page-break-after: always;
+  break-after: page;
+  margin-bottom: 48px;
+  overflow: hidden;
+}
+
+/* Dark top section — 58% of the letter page */
+.cover {
+  background: #202020;
+  flex: 0 0 58%;
+  display: flex;
+  flex-direction: column;
+}
+
+.coverTop {
+  padding: 48px 48px 0;
+}
+
+.coverWordmark {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+  font-family: inherit;
+  margin-bottom: 10px;
+  letter-spacing: 0;
+}
+
+.coverEyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--orange);
+  margin: 0;
+}
+
+.coverMiddle {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 48px 0;
+}
+
+/* White bottom section of cover page — Executive Summary only, rest is intentional whitespace */
+.coverWhite {
+  flex: 1;
+  padding: 2rem 48px 0;
+  background: #FCFCFC;
+}
+
+.coverProperty {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.12;
+  color: white;
+  margin-bottom: 36px;
+}
+
+.coverStats {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.coverStat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-right: 28px;
+  margin-right: 28px;
+  border-right: 1px solid rgba(255,255,255,0.12);
+}
+
+.coverStat:last-child {
+  border-right: none;
+  padding-right: 0;
+  margin-right: 0;
+}
+
+.coverStatLabel {
+  font-size: 0.66rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #666;
+}
+
+.coverStatValue {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: white;
+}
+
+.coverDivider {
+  height: 6px;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+
+/* ── Section ─────────────────────────────────────── */
+.section {
+  display: block;
+  margin-bottom: 56px;
+}
+
+.section:last-child { margin-bottom: 0; }
+
+.sectionHeading {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text);
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--orange);
+  margin-bottom: 20px;
+}
+
+.sectionIntro {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+/* ── Executive Summary ───────────────────────────── */
+.executiveSummary {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text);
+  background: transparent;
+  border-left: 3px solid var(--orange);
+  padding: 12px 0 12px 20px;
+  border-radius: 0;
+  display: block;
+}
+
+/* ── Finding cards ───────────────────────────────── */
+.findingsGrid {
+  display: block;
+}
+
+.findingCard {
+  background: transparent;
+  border: none;
+  border-left: 4px solid #FF6712;
+  border-radius: 0;
+  overflow: visible;
+  box-shadow: none;
+  display: block;
+  padding-left: 20px;
+}
+
+.findingDivider {
+  border: none;
+  border-top: 1px solid #E8E8E8;
+  margin: 24px 0;
+}
+
+.findingHeader {
+  padding: 0 0 10px 0;
+  border-bottom: none;
+  display: block;
+}
+
+.findingHeaderAnchor {
+  display: block;
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+.findingMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.findingIcon { font-size: 1rem; }
+
+.findingCategory {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.findingTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* Photo sections — layout and sizing handled via inline styles in JSX */
+
+/* Photo row — full width, no label-column indent */
+.findingPhotoRow {
+  margin-bottom: 16px;
+}
+
+.findingPhotoGrid {
+  display: block;
+}
+
+.findingBody {
+  padding: 10px 0 0;
+  display: block;
+}
+
+.findingRow {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 12px;
+  align-items: baseline;
+  margin-bottom: 14px;
+}
+
+.findingRow:last-child { margin-bottom: 0; }
+
+.findingRow p {
+  orphans: 3;
+  widows: 3;
+}
+
+.findingRowLabel {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.findingRecommendation {
+  background: #FFF8F4;
+  margin: 12px -20px 0;
+  padding: 12px 12px 12px 20px;
+  border-top: 1px solid #FFE5D3;
+}
+
+.findingRecommendation .findingRowLabel {
+  color: var(--orange);
+}
+
+/* ── Benchmarks ──────────────────────────────────── */
+.benchmarkCard {
+  background: transparent;
+  border: none;
+  border-left: 4px solid #FF6712;
+  border-radius: 0;
+  padding: 0 0 0 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  box-shadow: none;
+}
+
+.benchmarkIcon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.benchmarkTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.benchmarkDesc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* ── Why AirGarage ───────────────────────────────── */
+.whySection {
+  background: #FFF8F5;
+  border-radius: 0;
+  border: none;
+  padding: 24px 32px 20px;
+  display: block;
+}
+
+.whyEyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--orange);
+  margin-bottom: 6px;
+}
+
+.whyHeadline {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.vpCard {
+  background: transparent;
+  border: none;
+  border-left: 4px solid #FF6712;
+  border-radius: 0;
+  padding: 0 0 0 16px;
+  display: block;
+}
+
+.vpIcon {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.vpTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.vpBody {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.statBar {
+  text-align: center;
+  color: var(--orange);
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding-top: 8px;
+}
+
+/* ── CTA ─────────────────────────────────────────── */
+.ctaSection {
+  background: var(--text);
+  border-radius: 0;
+  padding: 1.25rem 2rem;
+  display: block;
+}
+
+.ctaHeading {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.ctaText {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.ctaButton {
+  display: inline-block;
+  background: var(--orange);
+  color: white;
+  padding: 10px 22px;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.ctaButton:hover { opacity: 0.85; text-decoration: none; }
+
+.ctaPrintRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ctaQrBox {
+  background: white;
+  padding: 6px;
+  border-radius: 6px;
+  display: inline-flex;
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.ctaButtonPrint {
+  white-space: normal;
+  text-align: center;
+  line-height: 1.25;
+  max-width: 200px;
+}
+
+/* ── Footer ──────────────────────────────────────── */
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding-top: 1rem;
+  border-top: 1px solid #E8E8E8;
+  margin-top: 2rem;
+  margin-bottom: 0;
+}
+
+.footerLogo {
+  width: 24px;
+  height: 24px;
+  opacity: 0.5;
+  display: block;
+}
+
+/* ── Edit mode fields ────────────────────────────── */
+.editInput {
+  display: block;
+  width: 100%;
+  border: 1.5px solid var(--orange);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  background: #FFFBF7;
+  outline: none;
+  transition: box-shadow 0.15s;
+}
+
+.editInput:focus {
+  box-shadow: 0 0 0 3px rgba(255, 103, 18, 0.18);
+}
+
+.editTextarea {
+  display: block;
+  width: 100%;
+  border: 1.5px solid var(--orange);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  background: #FFFBF7;
+  outline: none;
+  resize: vertical;
+  min-height: 70px;
+  transition: box-shadow 0.15s;
+}
+
+.editTextarea:focus {
+  box-shadow: 0 0 0 3px rgba(255, 103, 18, 0.18);
+}
+
+/* Edit textarea on dark CTA background */
+.editTextareaOnDark {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.85);
+  border-color: rgba(255, 103, 18, 0.7);
+}
+
+.editTextareaOnDark:focus {
+  box-shadow: 0 0 0 3px rgba(255, 103, 18, 0.3);
+}
+
+/* ── Responsive ──────────────────────────────────── */
+@media (max-width: 640px) {
+  .coverTop { padding: 28px 24px 0; }
+  .coverMiddle { padding: 16px 24px 0; }
+  .coverWhite { padding: 28px 24px 24px; }
+  .coverProperty { font-size: 2rem; }
+  .photoGrid2 { padding: 0 16px; }
+  .ctaSection { padding: 1.5rem; }
+  .whySection { padding: 32px 24px; }
+  .report { padding: 24px 16px 60px; }
+  .toolbar { padding: 12px 16px; }
+  .findingRow { grid-template-columns: 1fr; }
+}
