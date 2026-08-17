@@ -57,27 +57,43 @@ export function PhotoPlacementScreen({
     })),
   }
 
-  const downloadBothPdfs = async () => {
+  const downloadPdf = async (mode: 'email' | 'print' | 'both') => {
     if (!pdfReportRef.current || pdfLoading) return
+    const base = `Property Snapshot_${report.property}_AirGarage`
     try {
-      setPdfLoading('email')
-      setPdfVariant('email')
-      await new Promise((r) => setTimeout(r, 100))
-      const emailBlob = await generatePdfBlob(pdfReportRef.current, 'email')
-
-      setPdfLoading('print')
-      setPdfVariant('print')
-      await new Promise((r) => setTimeout(r, 100))
-      const printBlob = await generatePdfBlob(pdfReportRef.current, 'print')
-
-      const base = `Property Snapshot_${report.property}_AirGarage`
-      await downloadZip(
-        [
-          { filename: `${base}-email.pdf`, blob: emailBlob },
-          { filename: `${base}-direct-mail.pdf`, blob: printBlob },
-        ],
-        `${base}.zip`
-      )
+      if (mode === 'email') {
+        setPdfLoading('email')
+        setPdfVariant('email')
+        await new Promise((r) => setTimeout(r, 100))
+        const blob = await generatePdfBlob(pdfReportRef.current, 'email')
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement('a'); a.href = url; a.download = `${base}-email.pdf`; a.click()
+        URL.revokeObjectURL(url)
+      } else if (mode === 'print') {
+        setPdfLoading('print')
+        setPdfVariant('print')
+        await new Promise((r) => setTimeout(r, 100))
+        const blob = await generatePdfBlob(pdfReportRef.current, 'print')
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement('a'); a.href = url; a.download = `${base}-direct-mail.pdf`; a.click()
+        URL.revokeObjectURL(url)
+      } else {
+        setPdfLoading('email')
+        setPdfVariant('email')
+        await new Promise((r) => setTimeout(r, 100))
+        const emailBlob = await generatePdfBlob(pdfReportRef.current, 'email')
+        setPdfLoading('print')
+        setPdfVariant('print')
+        await new Promise((r) => setTimeout(r, 100))
+        const printBlob = await generatePdfBlob(pdfReportRef.current, 'print')
+        await downloadZip(
+          [
+            { filename: `${base}-email.pdf`, blob: emailBlob },
+            { filename: `${base}-direct-mail.pdf`, blob: printBlob },
+          ],
+          `${base}.zip`
+        )
+      }
     } catch {
       alert('PDF generation failed — please try again.')
     } finally {
@@ -165,10 +181,25 @@ export function PhotoPlacementScreen({
           <div className={styles.exportBtns}>
             <button
               className={styles.exportBtn}
-              onClick={downloadBothPdfs}
+              onClick={() => downloadPdf('email')}
               disabled={!!pdfLoading || regenLoading}
             >
-              {pdfLoading === 'email' ? 'Generating email…' : pdfLoading === 'print' ? 'Generating direct mail…' : '⬇ Download PDFs (Email + Direct Mail)'}
+              {pdfLoading === 'email' ? 'Generating…' : '⬇ Email PDF'}
+            </button>
+            <button
+              className={styles.exportBtn}
+              onClick={() => downloadPdf('print')}
+              disabled={!!pdfLoading || regenLoading}
+            >
+              {pdfLoading === 'print' ? 'Generating…' : '⬇ Direct Mail PDF'}
+            </button>
+            <button
+              className={styles.exportBtn}
+              onClick={() => downloadPdf('both')}
+              disabled={!!pdfLoading || regenLoading}
+              style={{ background: 'var(--text)' }}
+            >
+              {pdfLoading ? 'Generating…' : '⬇ Both'}
             </button>
           </div>
         </div>

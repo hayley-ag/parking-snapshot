@@ -157,7 +157,7 @@ export function FormPage({ onReport, prefill }: Props) {
 
         <section className={styles.section}>
           <div className={styles.notesHeader}>
-            <h2 className={styles.sectionTitle}>Notes *</h2>
+            <h2 className={styles.sectionTitle}>Notes or transcript *</h2>
             <div className={styles.toggle}>
               <button
                 type="button"

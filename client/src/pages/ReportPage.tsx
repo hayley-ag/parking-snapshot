@@ -211,7 +211,15 @@ function ObservationCard({
         </div>
         <div className={`${styles.findingRow} ${styles.findingRecommendation}`}>
           <span className={styles.findingRowLabel}>Recommendation</span>
-          <p>{obs.recommendation}</p>
+          {isEditing
+            ? <textarea
+                className={styles.editTextarea}
+                value={obs.recommendation}
+                onChange={(e) => upd({ recommendation: e.target.value })}
+                rows={2}
+              />
+            : <p>{obs.recommendation}</p>
+          }
         </div>
       </div>
     </div>
