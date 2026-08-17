@@ -98,7 +98,7 @@ export function FormPage({ onReport, prefill }: Props) {
         />
         <div>
           <h1 className={styles.title}>Parking Performance Snapshot</h1>
-          <p className={styles.subtitle}>CEO Site Visit Report Generator</p>
+          <p className={styles.subtitle}>Enter the property name, upload your site photos as JPEGs, and paste any notes or a transcript from your voice memo. The generator will pull these together into the snapshot report.</p>
         </div>
       </header>
 
